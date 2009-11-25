@@ -23,7 +23,7 @@ class Wapl
 # tha constructor
 	def initialize(new_key)
 		raise ArgumentError, "Missing dev key" if new_key.nil?
-			@dev_key= new_key
+		@dev_key= new_key
 	end
 # make a post request with all _SERVER details
 	def send_request(path,data)
@@ -43,17 +43,28 @@ class Wapl
 		end
 		return res
 	end
+
+	def parse_headers(env)
+		header_string = ""
+		env.each do |header|
+			header_string += header[0]+":"+header[1]+"|"#if header[0] =~ /^HTTP/i
+		end
+		return header_string
+	end
 # gets the info about mobile device
 	def get_mobile_device(headers)
 		raise ArgumentError, "Empty headers" if headers.nil? or headers ==""
-		res =  self.send_request 'get_mobile_device', {'headers'=>headers}
+		header_string = self.parse_headers headers
+		res =  self.send_request 'get_mobile_device', {'headers'=>header_string}
 		h = self.process_res_xml res.body
+        return header_string
 
 	end
 # checks whether the device is mobile
 	def is_mobile_device(headers)
 		raise ArgumentError, "Empty headers" if headers.nil? or headers ==""
-		res = self.send_request 'is_mobile_device', {'headers'=>headers}
+		header_string = self.parse_headers headers
+		res = self.send_request 'is_mobile_device', {'headers'=>header_string}
 		return res.body
 	end
 	def get_markup_from_url(makrup_url)
@@ -61,7 +72,7 @@ class Wapl
 		res = self.send_request 'get_markup_from_url', markup_url
 		markup_data = self.process_res_xml res.body
 	end
-	def get_markup_from_wapl(wapl_xml)
+	def get_markup_from_wapl(headers, wapl_xml)
 		raise ArgumentError, "Empty string" if wapl_xml.nil?
 		REXML::Document.new wapl_xml
 		res = self.send_request 'get_markup_from_wapl', markup_url
