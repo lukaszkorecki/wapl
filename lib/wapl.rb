@@ -22,17 +22,21 @@ class Wapl
 	end
 # tha constructor
 	def initialize(new_key)
-		@dev_key= new_key
+		raise ArgumentError, "Missing dev key" if new_key.nil?
+			@dev_key= new_key
 	end
 # make a post request with all _SERVER details
 	def send_request(path,data)
+		raise ArgumentError, "Missing Path" if path.nil? or path ==""
+		raise ArgumentError, "Missing data" if data.nil? or data =={}
 		url= URI.parse(@@api_root + @@resources[path].to_s)
 		post_data = {'devKey'=>@dev_key }.merge! data
 		res = HTTP.post_form url, post_data
 
 	end
-	def process_res_xml(x)
-		xml = REXML::Document.new x
+	def process_res_xml(xml_data)
+		raise ArgumentError, "Empty XML data" if xml_data.nil? or xml_data ==""
+		xml = REXML::Document.new xml_data
 		res = {}
 		xml.root.elements.each do |el|
 			res.merge! Hash[el.name.to_s,el.text.to_s]
@@ -41,14 +45,27 @@ class Wapl
 	end
 # gets the info about mobile device
 	def get_mobile_device(headers)
+		raise ArgumentError, "Empty headers" if headers.nil? or headers ==""
 		res =  self.send_request 'get_mobile_device', {'headers'=>headers}
 		h = self.process_res_xml res.body
 
 	end
 # checks whether the device is mobile
 	def is_mobile_device(headers)
+		raise ArgumentError, "Empty headers" if headers.nil? or headers ==""
 		res = self.send_request 'is_mobile_device', {'headers'=>headers}
 		return res.body
+	end
+	def get_markup_from_url(makrup_url)
+		raise ArgumentError, "Wrong or empty url" if markup_url.nil? or markup_url =="" # validate url
+		res = self.send_request 'get_markup_from_url', markup_url
+		markup_data = self.process_res_xml res.body
+	end
+	def get_markup_from_wapl(wapl_xml)
+		raise ArgumentError, "Empty string" if wapl_xml.nil?
+		REXML::Document.new wapl_xml
+		res = self.send_request 'get_markup_from_wapl', markup_url
+		markup_data = self.process_res_xml res.body
 	end
 end
 
