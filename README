@@ -1,0 +1,16 @@
+Wapl
+====
+
+This package contains a class which enables web developers to stop worrying about handling non-desktop browsers.
+
+By utilizing [Wapple's](http://wapple.net) API for device detection and the [WAPL markup language](http://wapl.info) the websites can be adjusted, rendered and delivered properly to any device.
+
+The package consists of API communication class and a view helper which makes it dead easy to create mobile friendly sites while retaining your standard, "big" version of your webapp untouched.
+
+Example
+=======
+
+Soon :-)
+
+
+Copyright (c) 2009 Łukasz Korecki, released under the MIT license
