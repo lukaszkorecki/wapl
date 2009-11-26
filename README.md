@@ -17,9 +17,22 @@ The package consists of API communication class and a view helper which makes it
 
 Wapple Architect preserves your url structure, your SEO and what-not.
 
+## TODO
+
+- wapl markup helper
+- more docs
+- sinatra example app
+
 ## Example
 
-Soon :-)
+
+    #rails (app_controller::before_filter::detect_if_is_mobile_device)
+    require 'wapl'
+    wapl = Wapl.new "YOUR_ARCHITECT_DEV_KEY", request.env
+    @is_mobile = wapl.is_mobile_device 
+    @data = wapl.get_mobile_device 
+    logger.info @is_mobile
+    logger.info @data
 
 
 Copyright (c) 2009 Łukasz Korecki, released under the MIT license
