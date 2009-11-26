@@ -12,7 +12,7 @@ The package consists of API communication class and a view helper which makes it
 1. Do an API call to detect whether it's a mobile device or not (it's much more sophisticated than simple UA sniffing)
 1. Store the result in the session
 1. If it's mobile device (you will get to know the model and the maker!) build your view using wapl-helper
-1. Do an API call to get the apropriate markup for the device
+1. Do an API call to get the appropriate markup for the device
 1. Profit
 
 Wapple Architect preserves your url structure, your SEO and what-not.
