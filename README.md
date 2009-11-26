@@ -34,5 +34,14 @@ Wapple Architect preserves your url structure, your SEO and what-not.
     logger.info @is_mobile
     logger.info @data
 
+And then change your layout and view to
 
-Copyright (c) 2009 Łukasz Korecki, released under the MIT license
+    #rails (your_controller::index)
+    if @data['mobile_device'].to_i == 1
+       render(:layout  => 'wapl', :template => 'your_controller/wapl/index')and return
+    end
+
+
+More to come - watch this space!
+
+_Copyright (c) 2009 Łukasz Korecki, released under the MIT license_
