@@ -23,25 +23,73 @@ Wapple Architect preserves your url structure, your SEO and what-not.
 - more docs
 - sinatra example app
 
-## Example
+## Examples
+### Rails
 
+*controller* (test controller)
 
-    #rails (app_controller::before_filter::detect_if_is_mobile_device)
     require 'wapl'
-    wapl = Wapl.new "YOUR_ARCHITECT_DEV_KEY", request.env
-    @is_mobile = wapl.is_mobile_device 
-    @data = wapl.get_mobile_device 
-    logger.info @is_mobile
-    logger.info @data
-
-And then change your layout and view to
-
-    #rails (your_controller::index)
-    if @data['mobile_device'].to_i == 1
-       render(:layout  => 'wapl', :template => 'your_controller/wapl/index')and return
+    class TestController < ApplicationController
+    # set up
+      before_filter :detect_mobile, :render_for_mobile
+      def index
+        @data
+        if @data['mobile_device'].to_i == 1
+          self.render_for_mobile
+          return
+        end
+        # proceed as usual
+      end
+    protected
+      def detect_mobile
+        # get an instance of Wapl class, use your dev key and pas through your headers
+        @wapl = Wapl.new "YOUR_WAPL_ARCHITECT_KEY", request.env
+        # check whether the device is a mobile device
+        # it's good to save this result in the session
+        @is_mobile = @wapl.is_mobile_device 
+        # does pretty much the same thing, but als o gets the info about the device
+        @data = @wapl.get_mobile_device 
+      end
+      def render_for_mobile
+        # grab the view dedicated for mobile
+        wapl_xml = render_to_string(:layout  => 'wapl', :template => 'connector/wapl/index')
+        # send the WAPL xml 
+        resp = @wapl.get_markup_from_wapl wapl_xml
+        # get the final markup from the response
+        @markup = resp['markup'].to_s
+        # use the apropriate headers as well
+        resp['headers'].each { |k,v| response.headers[k] = v }
+        # render the stuff
+        render :inline => @markup
+      end
     end
 
+*view* (app/views/test/wapl/index.erb) (can be anywhere you want, but it's good to keep them in one place)
 
-More to come - watch this space!
+        <easyChars>
+          <value>Your mobile phone is: </value>
+        </easyChars>
+        <% for info in @data %>
+          <easyChars make_safe="1">
+          <value>[b]<%= info[0] %>[/b]: <%= info[1] %></value>
+          </easyChars>
+        <% end %>
+
+*layout*
+
+
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <wapl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://wapl.wapple.net/wapl.xsd">
+    <head>
+      <title>your mobile title</title>
+    </head>
+     <layout>
+       <%= yield %>
+     </layout>
+    </wapl>
+
+And... That's it.
+
+More  examples and stuff to come - watch this space!
 
 _Copyright (c) 2009 Łukasz Korecki, released under the MIT license_
