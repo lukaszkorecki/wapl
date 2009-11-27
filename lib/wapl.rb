@@ -1,4 +1,3 @@
-# Wapl
 require 'net/http'
 require 'uri'
 require 'rexml/document'
@@ -35,45 +34,47 @@ class Wapl
     return header_string
   end
 # make a post request with all _SERVER details
-  def send_request(path,data)
-    raise ArgumentError, "Missing Path" if path.nil? or path ==""
-    raise ArgumentError, "Missing data" if data.nil? or data =={}
+  def send_request(path,arg = {})
     url= URI.parse(@@api_root + @@resources[path].to_s)
-    post_data = {'devKey'=>@dev_key }.merge! data
-    res = HTTP.post_form(url, post_data)
-
-  end
-  def process_res_xml(xml_data)
-    raise ArgumentError, "Empty XML data" if xml_data.nil? or xml_data ==""
-    xml = REXML::Document.new(xml_data)
-    res = {}
-    xml.root.elements.each do |el|
-      res.merge! Hash[el.name.to_s,el.text.to_s]
-    end
-    return res
+    post_arg = {'devKey'=>@dev_key , 'headers'=>@header_string }
+    post_arg.merge!(arg)#unless arg.nil?
+    res = HTTP.post_form(url, post_arg)
   end
 
 # gets the info about mobile device
   def get_mobile_device()
-    res =  self.send_request 'get_mobile_device', {'headers'=>@header_string}
-    h = self.process_res_xml res.body
+    res =  self.send_request 'get_mobile_device'
+    device_info_xml = REXML::Document.new(res.body).root
+    device_info_xml.elements.each do |el|
+      res.merge! Hash[el.name.to_s,el.text.to_s]
+    end
+    return res
+    
 
   end
 # checks whether the device is mobile
   def is_mobile_device()
-    res = self.send_request 'is_mobile_device', {'headers'=>@header_string}
+    res = self.send_request 'is_mobile_device'
     return res.body
   end
-  def get_markup_from_url(makrup_url)
-    raise ArgumentError, "Wrong or empty url" if markup_url.nil? or markup_url =="" # validate url
-    res = self.send_request 'get_markup_from_url', markup_url
-    markup_data = self.process_res_xml res.body
+# submits the wapl markup along with the headers
+# brings back proper markup for the current device and required headers
+  def get_markup_from_wapl(wapl_xml="")
+    raise ArgumentError, "Empty string" if wapl_xml == ""
+    res = self.send_request 'get_markup_from_wapl', {'wapl'=>wapl_xml} 
+    markup_res_xml = REXML::Document.new(res.body).root
+    res = []
+    markup_res_xml.elements.each('header/item') { |el| res.push(el.text) }
+    headers = {'headers'=>res }
+    headers.merge! {'markup ' => elo.elements.collect('markup') { |el| el.cdatas} }
   end
-  def get_markup_from_wapl(headers, wapl_xml)
-    raise ArgumentError, "Empty string" if wapl_xml.nil?
-    REXML::Document.new wapl_xml
-    res = self.send_request 'get_markup_from_wapl', markup_url
+# submits the wapl markup url along with the headers
+# brings back proper markup for the current device and required headers
+  def get_markup_from_url(makrup_url="")
+    raise ArgumentError, "Wrong or empty url" if markup_url == ""
+    res = self.send_request 'get_markup_from_url', { 'waplUrl'=>markup_url }
     markup_data = self.process_res_xml res.body
+    return {'res'=>res, 'data'=> markup_data}
   end
 end
 
