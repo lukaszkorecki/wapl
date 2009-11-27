@@ -45,10 +45,11 @@ class Wapl
   def get_mobile_device()
     res =  self.send_request 'get_mobile_device'
     device_info_xml = REXML::Document.new(res.body).root
+    rez ={}
     device_info_xml.elements.each do |el|
-      res.merge! Hash[el.name.to_s,el.text.to_s]
+      rez.merge! Hash[el.name.to_s,el.text.to_s]
     end
-    return res
+    return rez
     
 
   end
@@ -63,10 +64,14 @@ class Wapl
     raise ArgumentError, "Empty string" if wapl_xml == ""
     res = self.send_request 'get_markup_from_wapl', {'wapl'=>wapl_xml} 
     markup_res_xml = REXML::Document.new(res.body).root
-    res = []
-    markup_res_xml.elements.each('header/item') { |el| res.push(el.text) }
-    headers = {'headers'=>res }
-    headers.merge! {'markup ' => elo.elements.collect('markup') { |el| el.cdatas} }
+    res = {}
+    markup_res_xml.elements.each('header/item') do |el|
+      splits = el.text.split(': ');
+      h = Hash[splits[0], splits[1]]
+      res.merge! h
+    end
+    markup = markup_res_xml.elements.collect('markup') { |el| el.cdatas}
+    return {'markup' => markup, 'headers'=>res }
   end
 # submits the wapl markup url along with the headers
 # brings back proper markup for the current device and required headers

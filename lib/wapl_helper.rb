@@ -1,1 +1,2 @@
-../../../../app/helpers/wapl_helper.rb
+module WaplHelper
+end
