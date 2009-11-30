@@ -63,15 +63,20 @@ class Wapl
   def get_markup_from_wapl(wapl_xml="")
     raise ArgumentError, "Empty string" if wapl_xml == ""
     res = self.send_request 'get_markup_from_wapl', {'wapl'=>wapl_xml} 
-    markup_res_xml = REXML::Document.new(res.body).root
-    res = {}
-    markup_res_xml.elements.each('header/item') do |el|
-      splits = el.text.split(': ');
-      h = Hash[splits[0], splits[1]]
-      res.merge! h
+    unless res.body.scan('WAPL ERROR').empty?
+      markup = wapl_xml + "<!-- WAPL XML ERROR #{ res.inspect } -->"
+      headers = ''
+    else
+      markup_res_xml = REXML::Document.new(res.body).root
+      res = {}
+      markup_res_xml.elements.each('header/item') do |el|
+        splits = el.text.split(': ');
+        h = Hash[splits[0], splits[1]]
+        res.merge! h
+      end
+      markup = markup_res_xml.elements.collect('markup') { |el| el.cdatas}
     end
-    markup = markup_res_xml.elements.collect('markup') { |el| el.cdatas}
-    return {'markup' => markup, 'headers'=>res }
+      return {'markup' => markup, 'headers'=>res }
   end
 # submits the wapl markup url along with the headers
 # brings back proper markup for the current device and required headers
