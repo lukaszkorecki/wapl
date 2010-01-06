@@ -21,8 +21,8 @@ module WaplHelper
     require 'cgi'
     CGI.escapeHTML(content)
   end
-  def self.print(hash)
-    w = self
+  def self.render_markup(hash)
+    w = self # ?????????
     # defaults :-)
     output, child, att, value = ""
     hash.each do |k,v|

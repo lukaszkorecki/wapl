@@ -28,11 +28,13 @@ class Wapl
   # arch_dev_key:: Your Architect dev key
   # headers:: headers for the request - for rails that would be request.env
   # Returns a new instance of Wapl
-  def initialize(arch_dev_key, headers)
-    raise ArgumentError, "Missing dev key" if arch_dev_key.nil?
+  def initialize(arch_dev_key = "", headers = {})
     @dev_key= arch_dev_key
     @header_string = self.parse_headers(headers)
     @api_root="http://webservices.wapple.net"
+  end
+  def set_headers(headers)
+    @header_string = self.parse_headers(headers)
   end
   # Parses the request headers and gets only HTTP_* headers
   # returns properly formatted string of keys and values
@@ -98,6 +100,7 @@ class Wapl
   end
 # submits the wapl markup url along with the headers
 # brings back proper markup for the current device and required headers
+# TODO / FIXME check whether supplied string is a url
   def get_markup_from_url(makrup_url="")
     raise ArgumentError, "Wrong or empty url" if markup_url == ""
     res = self.send_request 'get_markup_from_url', { 'waplUrl'=>markup_url }
