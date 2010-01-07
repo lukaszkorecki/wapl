@@ -97,6 +97,32 @@ Wapple Architect preserves your url structure, your SEO and what-not.
 
 And... That's it.
 
+## Helper Example
+
+You can use the WaplHelper, it's included now in the plugin.
+For more information about WAPL markup refer to the [official docs](http://wapl.info/coding-for-the-mobile-web-with-WAPL/chapter/Developing-with-WAPL/).
+
+It's still in development, but it's pretty usable :-)
+
+		<%= chars('wowza!') %>
+		<%= chars('[b]elo[/b]',{ :attributes =>{ 'make_safe'=>'false' }, :cell=>{ "class" => "test"}, :row=>{:id=>'duzy'}}) %>
+		<%= chars('[b]elo[/b]',{ :attributes =>{ 'make_safe'=>'false' }}) %>
+		<%= external_image('http://wapl.info/img/header_wapple.png') %>
+		<%= external_image('http://wapl.info/img/header_wapple.png', { :attributes=>{ :file_type => "png", :scale =>"150"} }) %>
+		<%= external_image('http://wapl.info/img/header_wapple.png' , { :children => { :safe_mode => "1"}}) %>
+		<%= external_image('http://wapl.info/img/header_wapple.png') %>
+		<%= external_link("Google", 'http://google.com') %>
+		<%= external_link("Google", "http://google.com", { :attributes => { :id => "wgp"}, :image => { :url => "http://wapl.info/img/header_wapple.png"}}  ) %>
+		<%= external_link("Google", "http://google.com", { :attributes => { :id => "woop"} }) %>
+		<%= external_link("Google", "http://google.com", { :attributes => { :id => "woop"} }) %>
+
+	
+Or you can go one level deeper and use just the helper methods (not recommended):
+
+		<% ch = tag('chars', tag('value', "TEST")) %>
+		<%= row_cell(ch) %>
+		
+
 More  examples and stuff to come - watch this space!
 
 _Copyright (c) 2009 Łukasz Korecki, released under the MIT license_
