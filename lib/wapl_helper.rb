@@ -26,11 +26,11 @@ module WaplHelper
 
   def tag(tag_name, content,  attributes = {})
     
-    tag = self.t_s(tag_name)
+    t = self.t_s(tag_name)
     unless attributes.empty?
-      tag = self.t_s(tag_name, self.attr_string(attributes))
+      t = self.t_s(tag_name, self.attr_string(attributes))
     end
-    tag << content << self.t_e(tag_name)
+    t << content << self.t_e(tag_name)
   end
 
   def row_cell(tag_string, cell={}, row={})
@@ -40,45 +40,54 @@ module WaplHelper
 
   def children_list(children={})
     children_str =""
-    children.each { |tag, val| children_str += %Q{ < #{tag} > #{val} </ #{tag} > }}
+    children.each { |tag, val| children_str +=  self.tag(tag, val)}
     return children_str
   end
   def chars(content, options={})
     # defaults
     attributes = options[:attributes] || {}
-    cell = options[:cell] || {}
-    row = options[:row] || {}
 
     value = self.tag('value', content)
     chars = self.tag("chars", value, attributes )
-    self.row_cell(chars, cell, row)
-  end
-  def external_link(label, url, options={})
-    attributes = options[:attributes] || {}
+
     cell = options[:cell] || {}
     row = options[:row] || {}
+    self.row_cell(chars, cell, row)
+  end
+  def external_image(url, options={}, just_element=false)
+    attributes = options[:attributes] || {}
+    children = options[:children] || {}
+
+    children[:url] = url
+    child_elements = self.children_list(children)
+
+    img = self.tag('externalImage', child_elements, attributes)
+
+    unless just_element
+      cell = options[:cell] || {}
+      row = options[:row] || {}
+      self.row_cell(img, cell, row)
+    else
+      return img
+    end
+  end
+  def external_link(link_label, url, options={})
+    attributes = options[:attributes] || {}
     children = options[:children] || {}
     image = options[:image] || {}
 
-    img = self.external_image(image[:url], image) || ""
+   img =""
+   unless image.empty?
+      img = self.external_image(image[:url], image, true) 
+    end
 
-    child_elements = self.children_list(children + img  )
-    label = self.tag('label', label)
+    child_elements = self.children_list(children) << img
+    link_label = self.tag('label', link_label)
     url = self.tag('url', url)
-    tag = self.tag('externalLink', url + label + child_elements)
+    link = self.tag('externalLink', url + link_label + child_elements)
 
-    self.row_cell(tag, options[:cell], options[:row])
-  end
-  def external_image(url, options)
-    attributes = options[:attributes] || {}
     cell = options[:cell] || {}
     row = options[:row] || {}
-    children = options[:children] || {}
-
-    options[:url] = url
-    child_elements = self.children_list(children)
-
-    tag = self.tag('externalImage', child_elements, attributes)
-    self.row_cell(tag, options[:cell], options[:row])
+    self.row_cell(link, cell, row)
   end
 end
