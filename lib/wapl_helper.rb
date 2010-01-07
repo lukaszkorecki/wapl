@@ -25,10 +25,13 @@ module WaplHelper
   end
 
   def tag(tag_name, content,  attributes = {})
-    
     t = self.t_s(tag_name)
     unless attributes.empty?
       t = self.t_s(tag_name, self.attr_string(attributes))
+    end
+
+    if tag_name == 'value' or tag_name == 'url'
+      content = '<![CDATA[ '+content+' ]]>'
     end
     t << content << self.t_e(tag_name)
   end
