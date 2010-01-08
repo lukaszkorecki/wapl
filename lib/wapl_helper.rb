@@ -2,26 +2,30 @@ module WaplHelper
 # private # TODO make it private later!
   def t_s(tag_name, attr="")
     if attr.empty?
-      %Q{ <#{tag_name}>}
+      %Q{<#{tag_name}>}
     else
-      %Q{ <#{tag_name} #{ attr} > }
+      %Q{<#{tag_name} #{attr}>}
     end
   end
 
   def attr_string(attr)
     op_str = ""
   # if(attr.lenth > 0)
-      attr.each { |k,v|  op_str += %Q{ #{k}="#{v}" } }
+      attr.each { |k,v|  op_str += %Q{#{k}="#{v}" } }
   # end
-    return op_str
+    return op_str.strip
   end
   def t_e(tag_name)
-    %Q{ </#{tag_name}>}
+    %Q{</#{tag_name}>}
   end
 
   def sanitize_html(content)
     require 'cgi'
     CGI.escapeHTML(content)
+  end
+  def cdatize(content)
+
+      content = '<![CDATA[ '+content+' ]]>'
   end
 
   def tag(tag_name, content,  attributes = {})
@@ -30,9 +34,6 @@ module WaplHelper
       t = self.t_s(tag_name, self.attr_string(attributes))
     end
 
-    if tag_name == 'value' or tag_name == 'url'
-      content = '<![CDATA[ '+content+' ]]>'
-    end
     t << content << self.t_e(tag_name)
   end
 
@@ -87,7 +88,7 @@ module WaplHelper
     child_elements = self.children_list(children) << img
     link_label = self.tag('label', link_label)
     url = self.tag('url', url)
-    link = self.tag('externalLink', url + link_label + child_elements)
+    link = self.tag('externalLink', url + link_label + child_elements, attributes)
 
     cell = options[:cell] || {}
     row = options[:row] || {}
