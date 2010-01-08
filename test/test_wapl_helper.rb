@@ -69,4 +69,14 @@ class WaplTest < ActiveSupport::TestCase
     link = '<row><cell id="dupa"><externalLink id="wgp"><url>http://google.com</url><label>Google</label><externalImage><url>http://wapl.info/img/header_wapple.png</url></externalImage></externalLink></cell></row>'
     assert_equal(link, external_link("Google", "http://google.com", { :attributes => { :id => "wgp"}, :image => { :url => "http://wapl.info/img/header_wapple.png"}, :cell => { :id => "dupa"}}  ))
   end
+  def test_title
+    assert_equal('<title>my title</title>', title('my title'))
+  end
+  def test_style_sheet
+    assert_equal('<css><url>http://my.css.com/1.css</url></css>', style_sheet('http://my.css.com/1.css'))
+  end
+  def test_meta_tag
+    assert_equal('<meta name="keywords" content="a list of stuff" />', meta({:keywords =>"a list of stuff"}))
+    assert_equal('<meta name="keywords" content="a list of stuff" /><meta name="encoding" content="utf-8" />', meta({:keywords =>"a list of stuff", :encoding=>"utf-8"}))
+  end
 end

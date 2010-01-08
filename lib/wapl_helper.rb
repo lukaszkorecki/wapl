@@ -25,7 +25,7 @@ module WaplHelper
   end
   def cdatize(content)
 
-      content = '<![CDATA[ '+content+' ]]>'
+      content = '<![CDATA[ ' << content << ' ]]>'
   end
 
   def tag(tag_name, content,  attributes = {})
@@ -88,10 +88,36 @@ module WaplHelper
     child_elements = self.children_list(children) << img
     link_label = self.tag('label', link_label)
     url = self.tag('url', url)
-    link = self.tag('externalLink', url + link_label + child_elements, attributes)
+    link = self.tag('externalLink', url << link_label << child_elements, attributes)
 
     cell = options[:cell] || {}
     row = options[:row] || {}
     self.row_cell(link, cell, row)
+  end
+# head section tags
+  def start_wapl
+    return '<wapl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://wapl.wapple.net/wapl.xsd">'
+  end
+  def end_wapl
+    return self.t_e('wapl')
+  end
+  def meta(options={})
+    metaz = ""
+#   options.each { |k, v|  metaz += '<meta name="' + k + '" content="' + v + '" />'}
+#   it would be useful to have a single_tag methods, allthough this type of tag is used 
+#   only once in WAPL, so i'm not going to do this
+#   thanks for listening
+# options.each { |k,v|  metaz += %Q{<meta name="#{k}" content="#{v}" />} }
+    options.each { |k,v|  metaz += "<meta " + self.attr_string({ :name=>k, :content => v} )+ " />" }
+    return metaz
+  end
+  def style_sheet(url="")
+    self.tag('css', self.tag('url', url))
+  end
+  def css(url="")
+    self.style_sheet(url)
+  end
+  def title(title="")
+    self.tag('title', title)
   end
 end
