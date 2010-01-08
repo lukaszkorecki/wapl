@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_mobile_device (Wapl)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wapl.rb, line 63</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_mobile_device</span>()
+    <span class="ruby-identifier">res</span> =  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send_request</span> <span class="ruby-value str">'get_mobile_device'</span>
+    <span class="ruby-identifier">device_info_xml</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">res</span>.<span class="ruby-identifier">body</span>).<span class="ruby-identifier">root</span>
+    <span class="ruby-identifier">rez</span> ={}
+    <span class="ruby-identifier">device_info_xml</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">el</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">rez</span>.<span class="ruby-identifier">merge!</span> <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">el</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>,<span class="ruby-identifier">el</span>.<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_s</span>]
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">rez</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

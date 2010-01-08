@@ -1,20 +1,20 @@
 require 'net/http'
 require 'uri'
 require 'rexml/document'
-# This Class is responsible for communicating with Wapple Mobile Api
-# It enables the programmer to completelty mobilize an existing web app
-# Without breaking it :-)
-# for more info about Wapple Architect please go to http://wapl.info
+  # This Class is responsible for communicating with Wapple Mobile Api
+  # It enables the programmer to completelty mobilize an existing web app
+  # Without breaking it :-)
+  # for more info about Wapple Architect please go to http://wapl.info
 class Wapl
   include ::Net
   attr_accessor :dev_key, :header_string
-# api root
-     @@api_root = "http://webservices.wapple.net"
+  # api root
+  @@api_root = "http://webservices.wapple.net"
    def self.api_root
      @@api_root
    end
-# RESTy resources
-   @@resources = {
+  # RESTy resources
+  @@resources = {
      "is_mobile_device"	=>"/isMobileDevice.php",
      "get_mobile_device"	=>"/getMobileDevice.php",
      "get_markup_from_wapl"	=>"/getMarkupFromWapl.php",

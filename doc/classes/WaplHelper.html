@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: WaplHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">WaplHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/wapl_helper_rb.html">
+                lib/wapl_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000035">attr_string</a>&nbsp;&nbsp;
+      <a href="#M000038">cdatize</a>&nbsp;&nbsp;
+      <a href="#M000042">chars</a>&nbsp;&nbsp;
+      <a href="#M000041">children_list</a>&nbsp;&nbsp;
+      <a href="#M000049">css</a>&nbsp;&nbsp;
+      <a href="#M000046">end_wapl</a>&nbsp;&nbsp;
+      <a href="#M000043">external_image</a>&nbsp;&nbsp;
+      <a href="#M000044">external_link</a>&nbsp;&nbsp;
+      <a href="#M000047">meta</a>&nbsp;&nbsp;
+      <a href="#M000040">row_cell</a>&nbsp;&nbsp;
+      <a href="#M000037">sanitize_html</a>&nbsp;&nbsp;
+      <a href="#M000045">start_wapl</a>&nbsp;&nbsp;
+      <a href="#M000048">style_sheet</a>&nbsp;&nbsp;
+      <a href="#M000036">t_e</a>&nbsp;&nbsp;
+      <a href="#M000034">t_s</a>&nbsp;&nbsp;
+      <a href="#M000039">tag</a>&nbsp;&nbsp;
+      <a href="#M000050">title</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000035.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000035.html');return false;">
+          <span class="method-name">attr_string</span><span class="method-args">(attr)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Converts a hash to attribute string Parameters
+</p>
+<table>
+<tr><td valign="top">Attr:</td><td>hash - { :name =&gt; &quot;test&quot;}
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000038.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000038.html');return false;">
+          <span class="method-name">cdatize</span><span class="method-args">(content)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Wrap string in to cdata marker parameters
+</p>
+<table>
+<tr><td valign="top">content:</td><td>- string to be wrapped
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000042.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000042.html');return false;">
+          <span class="method-name">chars</span><span class="method-args">(content, options={})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+WAPL specific element Creates <a href="WaplHelper.html#M000042">chars</a>
+element (see <a href="http://wapl.info">wapl.info</a> docs)
+</p>
+<table>
+<tr><td valign="top">content:</td><td>string - conent of the <a href="WaplHelper.html#M000042">chars</a> element
+
+</td></tr>
+<tr><td valign="top">options:</td><td>hash - custom options for the element, can contain:
+
+</td></tr>
+</table>
+<ul>
+<li>:attributes - for the <a href="WaplHelper.html#M000042">chars</a> elements
+(like id and other <a href="WaplHelper.html#M000042">chars</a>-specific
+settings)
+
+</li>
+<li>:row - row attribute hash
+
+</li>
+<li>:cell - cell attribute hash
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000041.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000041.html');return false;">
+          <span class="method-name">children_list</span><span class="method-args">(children={})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a list of child elements with their values
+</p>
+<table>
+<tr><td valign="top">Children:</td><td>hash with tags and their contents e.g. { :span =&gt; &quot;cool
+content&quot;}
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000049.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000049.html');return false;">
+          <span class="method-name">css</span><span class="method-args">(url=&quot;&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Renders external <a href="WaplHelper.html#M000049">css</a> declaration in
+the &lt;head /&gt; element alias for <a
+href="WaplHelper.html#M000048">style_sheet</a>()
+</p>
+<table>
+<tr><td valign="top">url:</td><td>- url for the external stylesheet
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000046.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000046.html');return false;">
+          <span class="method-name">end_wapl</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+closes the root element
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000043.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000043.html');return false;">
+          <span class="method-name">external_image</span><span class="method-args">(url, options={}, just_element=false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+WAPL specific element Creates external image element (see <a
+href="http://wapl.info">wapl.info</a> docs)
+</p>
+<table>
+<tr><td valign="top">url:</td><td>string - url to your image, WAPL engine will download it an process it
+
+</td></tr>
+<tr><td valign="top">options:</td><td>hash - custom options for the element, can contain:
+
+</td></tr>
+</table>
+<ul>
+<li>:attributes - for the <a href="WaplHelper.html#M000042">chars</a> elements
+(like id and other <a href="WaplHelper.html#M000042">chars</a>-specific
+settings)
+
+</li>
+<li>:row - row attribute hash
+
+</li>
+<li>:cell - cell attribute hash
+
+</li>
+</ul>
+<table>
+<tr><td valign="top">just_element:</td><td>bool - create just the element, without the wrapping &lt;row /&gt;&lt;cell
+/&gt;
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000044.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000044.html');return false;">
+          <span class="method-name">external_link</span><span class="method-args">(link_label, url, options={})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+WAPL specific element Creates external link element (see <a
+href="http://wapl.info">wapl.info</a> docs)
+</p>
+<table>
+<tr><td valign="top">link_label:</td><td>string - label for your link (usually content of &lt;a /&gt; element)
+
+</td></tr>
+<tr><td valign="top">url:</td><td>string - url for your link
+
+</td></tr>
+<tr><td valign="top">options:</td><td>hash - (optional) custom options for the element, can contain:
+
+</td></tr>
+</table>
+<ul>
+<li>:attributes - for the <a href="WaplHelper.html#M000042">chars</a> elements
+(like id and other <a href="WaplHelper.html#M000042">chars</a>-specific
+settings)
+
+</li>
+<li>:row - row attribute hash
+
+</li>
+<li>:cell - cell attribute hash
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000047.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000047.html');return false;">
+          <span class="method-name">meta</span><span class="method-args">(options={})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Layout method Returns list of <a href="WaplHelper.html#M000047">meta</a>
+tags
+</p>
+<table>
+<tr><td valign="top">Options:</td><td>hash - a hash of <a href="WaplHelper.html#M000047">meta</a> properites with
+value e.g. { :author =&gt; &quot;Lukasz Korecki&quot;}
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000040.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000040.html');return false;">
+          <span class="method-name">row_cell</span><span class="method-args">(tag_string, cell={}, row={})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Inserts a row and a cell with a specified content
+</p>
+<table>
+<tr><td valign="top">tag_string:</td><td>string - the content that goes into the row/cell
+
+</td></tr>
+<tr><td valign="top">cell:</td><td>hash - attribute hash for the &lt;cell /&gt; element
+
+</td></tr>
+<tr><td valign="top">row:</td><td>hash - attribute hash for the &lt;row /&gt; element
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000037.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000037.html');return false;">
+          <span class="method-name">sanitize_html</span><span class="method-args">(content)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sanitze content Parameters
+</p>
+<table>
+<tr><td valign="top">Content:</td><td>string
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000045" class="method-detail">
+        <a name="M000045"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000045.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000045.html');return false;">
+          <span class="method-name">start_wapl</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+head section tags XML / root element declaration for use in the layout
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000048.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000048.html');return false;">
+          <span class="method-name">style_sheet</span><span class="method-args">(url=&quot;&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Renders external <a href="WaplHelper.html#M000049">css</a> declaration in
+the &lt;head /&gt; element
+</p>
+<table>
+<tr><td valign="top">url:</td><td>- url for the external stylesheet
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000036.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000036.html');return false;">
+          <span class="method-name">t_e</span><span class="method-args">(tag_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Close the <a href="WaplHelper.html#M000039">tag</a> Parameters
+</p>
+<table>
+<tr><td valign="top">Tag_name:</td><td>- string
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000034.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000034.html');return false;">
+          <span class="method-name">t_s</span><span class="method-args">(tag_name, attr=&quot;&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Open a <a href="WaplHelper.html#M000039">tag</a> Parameters
+</p>
+<table>
+<tr><td valign="top">Tag_name:</td><td>string - name of the <a href="WaplHelper.html#M000039">tag</a> 
+
+</td></tr>
+<tr><td valign="top">Attribute:</td><td>string - like name=&quot;test&quot; woop=&quot;woop&quot;
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000039.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000039.html');return false;">
+          <span class="method-name">tag</span><span class="method-args">(tag_name, content, attributes = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a <a href="WaplHelper.html#M000039">tag</a> with optional
+attributes and content Parameters
+</p>
+<table>
+<tr><td valign="top">Tag_name:</td><td>string - the <a href="WaplHelper.html#M000039">tag</a> you wan to create
+e.g. &quot;value&quot;
+
+</td></tr>
+<tr><td valign="top">Content:</td><td>string = inner text of the <a href="WaplHelper.html#M000039">tag</a>
+
+</td></tr>
+<tr><td valign="top">Attributes:</td><td>hash - hash of attributes (key - val) for the element (optional)
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
+
+        <div class="method-heading">
+          <a href="WaplHelper.src/M000050.html" target="Code" class="method-signature"
+            onclick="popupCode('WaplHelper.src/M000050.html');return false;">
+          <span class="method-name">title</span><span class="method-args">(title=&quot;&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Title <a href="WaplHelper.html#M000039">tag</a>
+</p>
+<table>
+<tr><td valign="top"><a href="WaplHelper.html#M000050">title</a>:</td><td>string - <a href="WaplHelper.html#M000050">title</a> for your page
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

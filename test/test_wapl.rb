@@ -6,8 +6,7 @@ class WaplTest < ActiveSupport::TestCase
   attr_accessor :real_key
 
   def setup
-    @real_key = "3d5862e0e635e5217886f288673971c9"
-#   @real_key = ""
+   @real_key = ""
   end
   def test_constructor_without_dev_key
     assert Wapl.new

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_external_link (WaplTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_wapl_helper.rb, line 63</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_external_link</span>
+    <span class="ruby-identifier">link</span> = <span class="ruby-value str">'&lt;row&gt;&lt;cell&gt;&lt;externalLink&gt;&lt;url&gt;http://google.com&lt;/url&gt;&lt;label&gt;Google&lt;/label&gt;&lt;/externalLink&gt;&lt;/cell&gt;&lt;/row&gt;'</span>
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">link</span>, <span class="ruby-identifier">external_link</span>(<span class="ruby-value str">'Google'</span>, <span class="ruby-value str">'http://google.com'</span>))
+
+    <span class="ruby-identifier">link</span> = <span class="ruby-value str">'&lt;row&gt;&lt;cell&gt;&lt;externalLink id=&quot;wgp&quot;&gt;&lt;url&gt;http://google.com&lt;/url&gt;&lt;label&gt;Google&lt;/label&gt;&lt;externalImage&gt;&lt;url&gt;http://wapl.info/img/header_wapple.png&lt;/url&gt;&lt;/externalImage&gt;&lt;/externalLink&gt;&lt;/cell&gt;&lt;/row&gt;'</span>
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">link</span>, <span class="ruby-identifier">external_link</span>(<span class="ruby-value str">&quot;Google&quot;</span>, <span class="ruby-value str">&quot;http://google.com&quot;</span>, { <span class="ruby-identifier">:attributes</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;wgp&quot;</span>}, <span class="ruby-identifier">:image</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;http://wapl.info/img/header_wapple.png&quot;</span>}}  ))
+    <span class="ruby-identifier">link</span> = <span class="ruby-value str">'&lt;row&gt;&lt;cell id=&quot;dupa&quot;&gt;&lt;externalLink id=&quot;wgp&quot;&gt;&lt;url&gt;http://google.com&lt;/url&gt;&lt;label&gt;Google&lt;/label&gt;&lt;externalImage&gt;&lt;url&gt;http://wapl.info/img/header_wapple.png&lt;/url&gt;&lt;/externalImage&gt;&lt;/externalLink&gt;&lt;/cell&gt;&lt;/row&gt;'</span>
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">link</span>, <span class="ruby-identifier">external_link</span>(<span class="ruby-value str">&quot;Google&quot;</span>, <span class="ruby-value str">&quot;http://google.com&quot;</span>, { <span class="ruby-identifier">:attributes</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;wgp&quot;</span>}, <span class="ruby-identifier">:image</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;http://wapl.info/img/header_wapple.png&quot;</span>}, <span class="ruby-identifier">:cell</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;dupa&quot;</span>}}  ))
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>send_request (Wapl)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/wapl.rb, line 54</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send_request</span>(<span class="ruby-identifier">path</span>,<span class="ruby-identifier">arg</span> = {})
+    <span class="ruby-identifier">url</span>= <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@@api_root</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@@resources</span>[<span class="ruby-identifier">path</span>].<span class="ruby-identifier">to_s</span>)
+    <span class="ruby-identifier">post_arg</span> = {<span class="ruby-value str">'devKey'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-ivar">@dev_key</span> , <span class="ruby-value str">'headers'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-ivar">@header_string</span> }
+    <span class="ruby-identifier">post_arg</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">arg</span>)
+    <span class="ruby-identifier">res</span> = <span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">post_form</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">post_arg</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

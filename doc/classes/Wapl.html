@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Wapl</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Wapl</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/wapl_rb.html">
+                lib/wapl.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This Class is responsible for communicating with Wapple Mobile Api It
+enables the programmer to completelty mobilize an existing web app Without
+breaking it :-) for more info about Wapple Architect please go to <a
+href="http://wapl.info">wapl.info</a>
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000024">api_root</a>&nbsp;&nbsp;
+      <a href="#M000033">get_markup_from_url</a>&nbsp;&nbsp;
+      <a href="#M000032">get_markup_from_wapl</a>&nbsp;&nbsp;
+      <a href="#M000030">get_mobile_device</a>&nbsp;&nbsp;
+      <a href="#M000031">is_mobile_device</a>&nbsp;&nbsp;
+      <a href="#M000026">new</a>&nbsp;&nbsp;
+      <a href="#M000028">parse_headers</a>&nbsp;&nbsp;
+      <a href="#M000025">resources</a>&nbsp;&nbsp;
+      <a href="#M000029">send_request</a>&nbsp;&nbsp;
+      <a href="#M000027">set_headers</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">::Net</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">dev_key</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">header_string</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000024.html');return false;">
+          <span class="method-name">api_root</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000026.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(arch_dev_key = &quot;&quot;, headers = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the constructor Required parameters
+</p>
+<table>
+<tr><td valign="top">arch_dev_key:</td><td>Your Architect dev key
+
+</td></tr>
+<tr><td valign="top">headers:</td><td>headers for the request - for rails that would be request.env
+
+</td></tr>
+</table>
+<p>
+Returns a <a href="Wapl.html#M000026">new</a> instance of <a
+href="Wapl.html">Wapl</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000025.html');return false;">
+          <span class="method-name">resources</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000033" class="method-detail">
+        <a name="M000033"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000033.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000033.html');return false;">
+          <span class="method-name">get_markup_from_url</span><span class="method-args">(makrup_url=&quot;&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+submits the wapl markup url along with the headers brings back proper
+markup for the current device and required headers TODO / FIXME check
+whether supplied string is a url
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000032" class="method-detail">
+        <a name="M000032"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000032.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000032.html');return false;">
+          <span class="method-name">get_markup_from_wapl</span><span class="method-args">(wapl_xml=&quot;&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Submits the wapl markup along with the headers
+</p>
+<table>
+<tr><td valign="top">wapl_xml:</td><td>Properly formatted WAPL XML (see docs at htp://wapl.info) or use the <a
+href="WaplHelper.html">WaplHelper</a> module
+
+</td></tr>
+</table>
+<p>
+Returns hash containing
+</p>
+<ul>
+<li>proper markup for the current device
+
+</li>
+<li>required headers which need to be sent back to the device
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000030.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000030.html');return false;">
+          <span class="method-name">get_mobile_device</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+gets the info about mobile device Returns a Hash containing information
+model and the maker
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000031.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000031.html');return false;">
+          <span class="method-name">is_mobile_device</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+checks whether the device is mobile Returns 1 for true and 0 for a desktop
+browser
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000028.html');return false;">
+          <span class="method-name">parse_headers</span><span class="method-args">(headers_hash)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Parses the request headers and gets only HTTP_* headers returns properly
+formatted string of keys and values
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000029.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000029.html');return false;">
+          <span class="method-name">send_request</span><span class="method-args">(path,arg = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Communicates with the API Does a simple POST call with required arguments
+Always sends the dev_key and the headers
+</p>
+<table>
+<tr><td valign="top">path:</td><td>path to the API resource
+
+</td></tr>
+<tr><td valign="top">arg:</td><td>hash containing additional arguments (see wapl.info docs)
+
+</td></tr>
+</table>
+<p>
+Returns HTTP::result object
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="Wapl.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('Wapl.src/M000027.html');return false;">
+          <span class="method-name">set_headers</span><span class="method-args">(headers)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
