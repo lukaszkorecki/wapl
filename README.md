@@ -125,4 +125,6 @@ Or you can go one level deeper and use just the helper methods (not recommended)
 
 More  examples and stuff to come - watch this space!
 
+http://gist.github.com/272164
+
 _Copyright (c) 2009 Łukasz Korecki, released under the MIT license_
