@@ -37,7 +37,8 @@ class WaplTest < ActiveSupport::TestCase
   end
   def test_children_list
     children= {:url=>"http://google.com", :value=>"test"}
-    assert_equal("<value>test</value><url>http://google.com</url>", children_list(children))
+    assert_match("<url>http://google.com</url>", children_list(children))
+    assert_match("<value>test</value>", children_list(children))
   end
 
   def test_chars
@@ -55,9 +56,10 @@ class WaplTest < ActiveSupport::TestCase
     ext_img_element_only  ='<externalImage><url>http://localhost/1.gif</url></externalImage>'
     assert_equal(ext_img, external_image('http://localhost/1.gif'))
     assert_equal(ext_img_element_only, external_image('http://localhost/1.gif',{}, true))
-    ext_img_complicated = '<row><cell><externalImage scale="150" file_type="png"><url>http://localhost/1.gif</url></externalImage></cell></row>'
  
-    assert_equal(ext_img_complicated, external_image('http://localhost/1.gif', { :attributes=>{ :file_type => "png", :scale =>"150"} }) )
+    assert_match( 'scale="150"', external_image('http://localhost/1.gif', { :attributes=>{ :file_type => "png", :scale =>"150"} }) )
+    assert_match( 'file_type="png"', external_image('http://localhost/1.gif', { :attributes=>{ :file_type => "png", :scale =>"150"} }) )
+
  
   end
   def test_external_link

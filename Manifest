@@ -1,0 +1,13 @@
+MIT-LICENSE
+README.md
+Rakefile
+init.rb
+install.rb
+lib/wapl.rb
+lib/wapl_helper.rb
+tasks/wapl_tasks.rake
+test/test_helper.rb
+test/test_wapl.rb
+test/test_wapl_helper.rb
+uninstall.rb
+Manifest
