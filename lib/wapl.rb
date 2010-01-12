@@ -6,7 +6,6 @@ require 'rexml/document'
   # Without breaking it :-)
   # for more info about Wapple Architect please go to http://wapl.info
 class Wapl
-  include ::Net
   attr_accessor :dev_key, :header_string
   # api root
   @@api_root = "http://webservices.wapple.net"
@@ -55,7 +54,7 @@ class Wapl
     url= URI.parse(@@api_root + @@resources[path].to_s)
     post_arg = {'devKey'=>@dev_key , 'headers'=>@header_string }
     post_arg.merge!(arg)
-    res = HTTP.post_form(url, post_arg)
+    res = Net::HTTP.post_form(url, post_arg)
   end
 
   # gets the info about mobile device
